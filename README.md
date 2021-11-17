@@ -35,6 +35,25 @@ cfg.GetUint64("test_viper_config_uint64_value", 12345)
 cfg.GetFloat64("test_viper_config_float64_value", 123.456)
 cfg.GetTime("test_viper_config_time_value", time.Date(2021, 9, 15, 15, 31, 48, 123, time.UTC))
 cfg.GetDuration("test_viper_config_duration_value", 12 * time.Second)
+cfg.GetIntSlice("test_viper_config_intslice_value", []int{1, 1, 2, 2, 3, 3})
+cfg.GetStringSlice("test_viper_config_stringslice_value", []string{"Hello", "World!", "Nice Day!"})
+cfg.GetStringMap("test_viper_config_stringmap_value", map[string]interface{}{
+  "hello": "World!",
+  "Nice":  float64(112233),
+  "Day":   true,
+})
+cfg.GetStringMapString("test_viper_config_stringmapstring_value", map[string]string{
+  "Hello":   "World!",
+  "Nice To": "Meet You",
+  "Me":      "Too",
+})
+cfg.GetStringMapSlice("test_viper_config_stringmapslice_value", map[string][]string{
+  "test1": {"Hello", "World!"},
+  "test2": {"Nice", "To"},
+  "test3": {"Meet", "You"},
+})
+os.Setenv("WHAT", "bigger")
+cfg.GetString("no_exist", "white cow is $WHAT than black cow.")
 ```
 
 If the string values of GetString(), GetStringSlice(), GetStringSliceMap() contain environment variables, these will be expanded automatically.
